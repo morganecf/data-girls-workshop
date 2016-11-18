@@ -5,14 +5,14 @@ from sklearn import svm
 from sklearn import tree
 from sklearn.naive_bayes import GaussianNB
 from sklearn.naive_bayes import BernoulliNB
-from sklearn.linear_model import ElasticNet
+from sklearn.linear_model import SGDClassifier
 
 # Training data
-df = pd.read_csv('sample_tweets.csv', encoding='latin-1')
+df = pd.read_csv('full_data.csv', encoding='latin-1')
 
 # Isolate target and tweets
-subset = df.sample(n=10000)
-target = subset.polarity
+subset = df.sample(n=100000)
+target = subset.sentiment
 tweets = subset.text
 
 def train_and_save(model_type, out):
@@ -28,20 +28,20 @@ def train_and_save(model_type, out):
 
 # Gaussian Naive Bayes
 print('Training gaussian NB')
-train_and_save(GaussianNB, 'models/gaussian_naive_bayes.pkl')
+train_and_save(GaussianNB(), '../models/gaussian_naive_bayes.pkl')
 
 # Bernoulli Naive Bayes
-# print('Training bernoulli NB')
-# train_and_save(BernoulliNB, 'models/bernoulli_naive_bayes.pkl')
+print('Training bernoulli NB')
+train_and_save(BernoulliNB(), '../models/bernoulli_naive_bayes.pkl')
 
-# Elastic Net
-# print('Training Elastic Net')
-# train_and_save(ElasticNet, 'models/elastic_net.pkl')
+# SGD with Elastic Net regularization
+print('Training Elastic Net')
+train_and_save(ElasticNet(penalty='elasticnet'), '../models/elastic_net.pkl')
 
 # SVM
-# print('Training SVM')
-# train_and_save(svm.SVC, 'models/svm.pkl')
+print('Training SVM')
+train_and_save(svm.SVC(), '../models/svm.pkl')
 
-# # Decision Tree
-# print('Training decision tree')
-# train_and_save(tree.DecisionTreeClassifier, 'models/decision_tree.pkl')
+# Decision Tree
+print('Training decision tree')
+train_and_save(tree.DecisionTreeClassifier(), '../models/decision_tree.pkl')

@@ -37,7 +37,7 @@ class Model:
 
     def train(self):
       if self.features is not None:
-        self.classifier = self.model().fit(self.features.toarray(), self.target)
+        self.classifier = self.model.fit(self.features.toarray(), self.target)
       else:
         raise Exception('Model requires features before training')
 
