@@ -8,10 +8,10 @@ from sklearn.naive_bayes import BernoulliNB
 from sklearn.linear_model import SGDClassifier
 
 # Training data
-df = pd.read_csv('full_data.csv', encoding='latin-1')
+df = pd.read_csv('../full_data.csv', encoding='latin-1')
 
 # Isolate target and tweets
-subset = df.sample(n=100000)
+subset = df.sample(n=10000)
 target = subset.sentiment
 tweets = subset.text
 
@@ -21,10 +21,10 @@ def train_and_save(model_type, out):
   model.train()
 
   # Python 3
-  pickle.dump(model, open(out, 'wb'))
-
+  # pickle.dump(model, open(out, 'wb'))
   # Python 2
-  pickle.dump(model, open(out.replace('.', '_v2.'), 'wb'), protocol=2)
+  # pickle.dump(model, open(out.replace('.', '_v2.'), 'wb'), protocol=2)
+  pickle.dump(model, open(out, 'wb'))
 
 # Gaussian Naive Bayes
 print('Training gaussian NB')
@@ -34,13 +34,13 @@ train_and_save(GaussianNB(), '../models/gaussian_naive_bayes.pkl')
 print('Training bernoulli NB')
 train_and_save(BernoulliNB(), '../models/bernoulli_naive_bayes.pkl')
 
-# SGD with Elastic Net regularization
-print('Training Elastic Net')
-train_and_save(ElasticNet(penalty='elasticnet'), '../models/elastic_net.pkl')
-
 # SVM
 print('Training SVM')
 train_and_save(svm.SVC(), '../models/svm.pkl')
+
+# SGD with Elastic Net regularization
+print('Training SGD with elastic net regularization')
+train_and_save(ElasticNet(penalty='elasticnet'), '../models/elastic_net.pkl')
 
 # Decision Tree
 print('Training decision tree')

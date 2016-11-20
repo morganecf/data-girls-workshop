@@ -26,7 +26,7 @@ class Model:
       stop_words = set(get_stop_words('en'))
 
       # Get counts
-      self.word_vectorizer = CountVectorizer(ngram_range=(1, 3), analyzer='word', preprocessor=preprocess, stop_words=stop_words)
+      self.word_vectorizer = CountVectorizer(ngram_range=(2, 2), max_features=10000, analyzer='word', preprocessor=preprocess, stop_words=stop_words)
       word_doc_matrix = self.word_vectorizer.fit_transform(self.train_data)
 
       # Get tf-idf
