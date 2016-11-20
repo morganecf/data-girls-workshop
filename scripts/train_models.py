@@ -8,12 +8,11 @@ from sklearn.naive_bayes import BernoulliNB
 from sklearn.linear_model import SGDClassifier
 
 # Training data
-df = pd.read_csv('../full_data.csv', encoding='latin-1')
+df = pd.read_csv('../sample_tweets.csv', encoding='latin-1')
 
 # Isolate target and tweets
-subset = df.sample(n=10000)
-target = subset.sentiment
-tweets = subset.text
+target = df.sentiment
+tweets = df.text
 
 def train_and_save(model_type, out):
   model = Model(model_type, tweets, target)
