@@ -39,7 +39,7 @@ train_and_save(svm.SVC(), '../models/svm.pkl')
 
 # SGD with Elastic Net regularization
 print('Training SGD with elastic net regularization')
-train_and_save(ElasticNet(penalty='elasticnet'), '../models/elastic_net.pkl')
+train_and_save(SGDClassifier(penalty='elasticnet'), '../models/elastic_net.pkl')
 
 # Decision Tree
 print('Training decision tree')
