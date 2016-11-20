@@ -1,0 +1,5 @@
+Gaussian Naive Bayes: naive bayes that assumes features are normally distributed
+Bernoulli Naive Bayes: naive bayes that assumes binary features
+SGD: linear model that uses stochastic gradient descent
+SVM: finds best separating hyperplane
+Decision tree: finds set of decision rules
